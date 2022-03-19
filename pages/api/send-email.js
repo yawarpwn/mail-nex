@@ -2,6 +2,7 @@ const nodemailer = require("nodemailer");
 
 export default function handler (req, res) {
   const { name, email, message } = req.body;
+  console.log(process.env.PASSWORD)
 
   const html = `
     <div>
@@ -25,7 +26,7 @@ export default function handler (req, res) {
       secure: true, // true for 465, false for other ports
       auth: {
         user: "ventas@tellsenales.com", // generated ethereal user
-        pass: "Vts4524987$", // generated ethereal password
+        pass: `${process.env.PASSWORD}$`, // generated ethereal password
       },
       tls: {
         rejectUnauthorized: false,
@@ -42,7 +43,7 @@ export default function handler (req, res) {
 
     console.log("Message sent", info.messageId);
     console.log(req.body);
-    res.json("recibido");
+    res.json('working.....');
   }
 
   nodeMailer();
